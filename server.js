@@ -13,7 +13,6 @@ app.get('/', (req, res) => {
 
 app.get('/line', (req, res) => {
     const url = new URL(process.env.LINE_ME_URL + '/authorize')
-    console.log(url)
     url.search = new URLSearchParams({
       response_type: 'code',
       client_id: process.env.LINE_CLIENT_ID,
@@ -21,11 +20,10 @@ app.get('/line', (req, res) => {
       state: randomUUID(),
       scope: 'profile openid email',
     }).toString()
-    console.log(url.href)
     return res.redirect(url.href)
 })
 
-app.get('/line/redirect', async () => {
+app.get('/line/redirect', async (req, res) => {
     const urlToken = process.env.LINE_ME_URL_TOKEN + '/token'
     const urlVerify = process.env.LINE_ME_URL_TOKEN + '/verify'
     const headers = {
@@ -49,13 +47,15 @@ app.get('/line/redirect', async () => {
         id_token: dataToken.id_token,
         client_id: process.env.LINE_CLIENT_ID,
     })
-    const res = await fetch({
+    const result = await fetch({
         url: urlVerify,
         method: 'POST',
         headers,
         body: bodyVerify
     })
-    const dataVerify = await res.json()
+    console.log(result)
+    const dataVerify = await result.json()
+    console.log(dataVerify)
     return res.json(dataVerify)
 })
 

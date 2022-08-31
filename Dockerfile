@@ -13,7 +13,6 @@ RUN npm install
 # RUN npm ci --only=production
 
 ENV APP_PORT=3000
-
 ENV LINE_CLIENT_ID=1657377844
 ENV LINE_CLIENT_SECRET=829a1c9dea13e420d88d4dd4f9d3962a
 ENV LINE_ME_URL=https://access.line.me/oauth2/v2.1
