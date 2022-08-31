@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const { randomUUID } = require('crypto')
+const axios = require('axios').default
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -36,15 +36,10 @@ app.get('/line/redirect', async (req, res) => {
       client_id: process.env.LINE_CLIENT_ID,
       client_secret: process.env.LINE_CLIENT_SECRET,
     })
-    const resToken = await fetch({
-        url: urlToken,
-        method: 'POST',
-        headers,
-        body: bodyToken
-    })
-    const dataToken = await resToken.json()
+    const resToken = await axios.post(urlToken, bodyToken, headers)
+    console.log(resToken)
     const bodyVerify = new URLSearchParams({
-        id_token: dataToken.id_token,
+        id_token: resToken.id_token,
         client_id: process.env.LINE_CLIENT_ID,
     })
     const result = await fetch({
