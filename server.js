@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const axios = require('axios').default
+const http = require('http')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -36,12 +37,7 @@ app.get('/line/redirect', async (req, res) => {
       client_id: process.env.LINE_CLIENT_ID,
       client_secret: process.env.LINE_CLIENT_SECRET,
     })
-    const dataToken = await axios({
-        url: urlToken,
-        method: 'POST',
-        headers,
-        body: bodyToken
-    }).then(res => res).catch(err => console.log(err))
+    const dataToken = await axios.post(urlToken, bodyToken, { headers }).then(res => res).catch(err => console.log(err))
     console.log(dataToken)
     // const dataToken = await resToken.json()
     // const bodyVerify = new URLSearchParams({
