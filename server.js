@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/line', (req, res) => {
     const url = new URL(process.env.LINE_ME_URL + '/authorize')
+    console.log(url)
     url.search = new URLSearchParams({
       response_type: 'code',
       client_id: process.env.LINE_CLIENT_ID,
@@ -20,6 +21,7 @@ app.get('/line', (req, res) => {
       state: randomUUID(),
       scope: 'profile openid email',
     }).toString()
+    console.log(url.href)
     return res.redirect(url.href)
 })
 
