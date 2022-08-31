@@ -17,7 +17,7 @@ app.get('/line', (req, res) => {
     url.search = new URLSearchParams({
       response_type: 'code',
       client_id: process.env.LINE_CLIENT_ID,
-      redirect_uri: `${process.env.LINE_ENDPOIN}/auth/line/redirect`,
+      redirect_uri: `${process.env.LINE_ENDPOIN}/line/redirect`,
       state: randomUUID(),
       scope: 'profile openid email',
     }).toString()
