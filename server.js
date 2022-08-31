@@ -48,7 +48,7 @@ app.get("/line/redirect", async (req, res) => {
     .post(urlVerify, bodyVerify, { headers })
     .then((res) => res.data)
     .catch((err) => console.log(err));
-  return res.json(result);
+  return res.send(`<img src="${result.picture}" err="err" />`);
 });
 
 const APP_PORT = process.env.APP_PORT || 3000;
