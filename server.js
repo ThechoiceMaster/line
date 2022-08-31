@@ -12,14 +12,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/line', (req, res) => {
-    console.log(randomUUID())
-
     const url = new URL(process.env.LINE_ME_URL + '/authorize')
     url.search = new URLSearchParams({
       response_type: 'code',
       client_id: process.env.LINE_CLIENT_ID,
       redirect_uri: `${process.env.LINE_ENDPOIN}/line/redirect`,
-      state: randomUUID(),
+      state: token(),
       scope: 'profile openid email',
     }).toString()
     return res.redirect(url.href)
@@ -66,3 +64,12 @@ const APP_PORT = process.env.APP_PORT || 3000
 app.listen(APP_PORT, () => {
     console.log('server is running... ' + APP_PORT)
 })
+
+
+
+const rand = function() {
+    return Math.random().toString(36).substring(2); // remove `0.`
+};
+const token = function() {
+    return rand() + rand(); // to make it longer
+};

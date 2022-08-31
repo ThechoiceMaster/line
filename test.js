@@ -1,6 +1,8 @@
-const crypto = require('crypto');
+const rand = function() {
+    return Math.random().toString(36).substring(2); // remove `0.`
+};
+const token = function() {
+    return rand() + rand(); // to make it longer
+};
 
-const secret = 'abcdefg';
-const hash = crypto
-
-console.log(hash);
+console.log(token())
