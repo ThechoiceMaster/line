@@ -48,6 +48,7 @@ app.get("/line/redirect", async (req, res) => {
     .post(urlVerify, bodyVerify, { headers })
     .then((res) => res.data)
     .catch((err) => console.log(err));
+    console.log(result)
   return res.send(`<img src="${result.picture}" err="err" />`);
 });
 
