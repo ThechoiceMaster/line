@@ -36,22 +36,28 @@ app.get('/line/redirect', async (req, res) => {
       client_id: process.env.LINE_CLIENT_ID,
       client_secret: process.env.LINE_CLIENT_SECRET,
     })
-    const resToken = await axios.post(urlToken, bodyToken, headers)
-    console.log(resToken)
-    const bodyVerify = new URLSearchParams({
-        id_token: resToken.id_token,
-        client_id: process.env.LINE_CLIENT_ID,
-    })
-    const result = await fetch({
-        url: urlVerify,
+    const dataToken = await axios({
+        url: urlToken,
         method: 'POST',
         headers,
-        body: bodyVerify
-    })
-    console.log(result)
-    const dataVerify = await result.json()
-    console.log(dataVerify)
-    return res.json(dataVerify)
+        body: bodyToken
+    }).then(res => res).catch(err => console.log(err))
+    console.log(dataToken)
+    // const dataToken = await resToken.json()
+    // const bodyVerify = new URLSearchParams({
+    //     id_token: dataToken.id_token,
+    //     client_id: process.env.LINE_CLIENT_ID,
+    // })
+    // const result = await fetch({
+    //     url: urlVerify,
+    //     method: 'POST',
+    //     headers,
+    //     body: bodyVerify
+    // })
+    // console.log(result)
+    // const dataVerify = await result.json()
+    // console.log(dataVerify)
+    return res.json(dataToken)
 })
 
 const APP_PORT = process.env.APP_PORT || 3000
