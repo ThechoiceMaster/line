@@ -33,7 +33,7 @@ app.get('/line/redirect', async (req, res) => {
     const bodyToken = new URLSearchParams({
       grant_type: 'authorization_code',
       code: req.query.code,
-      redirect_uri: `${process.env.LINE_ENDPOIN}/auth/line/redirect`,
+      redirect_uri: `${process.env.LINE_ENDPOIN}/line/redirect`,
       client_id: process.env.LINE_CLIENT_ID,
       client_secret: process.env.LINE_CLIENT_SECRET,
     })
