@@ -1,3 +1,6 @@
-const { randomUUID } = require('crypto')
+const crypto = require('crypto');
 
-console.log(randomUUID())
+const secret = 'abcdefg';
+const hash = crypto.randomUUID()
+
+console.log(hash);
