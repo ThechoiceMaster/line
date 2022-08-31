@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/line', (req, res) => {
+    console.log(randomUUID())
+
     const url = new URL(process.env.LINE_ME_URL + '/authorize')
     url.search = new URLSearchParams({
       response_type: 'code',
