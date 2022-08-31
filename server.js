@@ -23,7 +23,7 @@ app.get('/line', (req, res) => {
     return res.redirect(url.href)
 })
 
-app.get('/line/redirect', async ()=> {
+app.get('/line/redirect', async () => {
     const urlToken = process.env.LINE_ME_URL_TOKEN + '/token'
     const urlVerify = process.env.LINE_ME_URL_TOKEN + '/verify'
     const headers = {
@@ -59,6 +59,6 @@ app.get('/line/redirect', async ()=> {
 
 const APP_PORT = process.env.APP_PORT || 3000
 
-app.listen(APP_PORT, ()=>{
+app.listen(APP_PORT, () => {
     console.log('server is running... ' + APP_PORT)
 })
