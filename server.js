@@ -49,7 +49,8 @@ app.get("/line/redirect", async (req, res) => {
     .then((res) => res.data)
     .catch((err) => console.log(err));
     console.log(result)
-  return res.send(`<img src="${result.picture}" err="err" />`);
+  const card = GenCard(result) 
+  return res.send(card);
 });
 
 const APP_PORT = process.env.APP_PORT || 3000;
@@ -64,3 +65,46 @@ const rand = function () {
 const token = function () {
   return rand() + rand(); // to make it longer
 };
+
+
+function GenCard(params) {
+    return `<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+h2 {
+    text-align: center;
+}
+.card {
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+</style>
+</head>
+<body>
+
+<h2>${params.name}</h2>
+
+<div class="card">
+  <img src="${params.picture}" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>${params.email}</b></h4> 
+    <p>charming human</p> 
+  </div>
+</div>
+
+</body>
+</html> 
+`
+}
